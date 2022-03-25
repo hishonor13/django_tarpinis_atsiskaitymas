@@ -1,0 +1,17 @@
+{% extends 'autoservice/base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>{% trans 'Search results' %}</h1>
+    <p>{% trans 'Query' %}: <span class="text-bold">{{ query }}</span></p>
+    {% if cars %}
+        <ul class="list-group">
+            {% for car in cars %}
+            <li class="list-group-item">
+                <a href="{% url 'autoservice:car-detail' car.id %}">{{ car.car_model.brand }} - {{ car.car_model.model }} @ {{ car.client.user }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-danger">{% trans 'No cars found.' %}</p>
+    {% endif %}
+{% endblock content %}

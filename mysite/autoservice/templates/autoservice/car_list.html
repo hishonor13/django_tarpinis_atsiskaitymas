@@ -1,0 +1,43 @@
+{% extends 'autoservice/base.html' %}
+{% load i18n static %}
+{% block content %}
+    <h1>{% trans 'Cars list' %}</h1>
+    {% if cars %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">{% trans 'first' %}</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">{% trans 'previous' %}</a>
+                {% endif %}
+                <span class="current">{{ page_obj.number }} {% trans 'of ' %} {{ page_obj.paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">{% trans 'next' %}</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">{% trans 'last' %} </a>
+                {% endif %}
+            </span>
+        </div>
+        <div class="container">
+            <br/><br/>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <th scope="col">#</th>
+                    <th scope="col">{% trans 'Car' %}</th>
+                    <th scope="col">{% trans 'Plate number' %}</th>
+                    <th scope="col">{% trans 'VIN code' %}</th>
+                </thead>
+                {% for car in cars %}
+                    <tbody>
+                        <tr onclick=window.location.href="{% url 'autoservice:car-detail' car.id %}">
+                            <th scope="row"><img src="{% if car.picture %}{{ car.picture.url }}{% else %}{% static 'autoservice/img/default.png' %}{% endif %}" height='50'></th>
+                            <th scope="row">{{ car.car_model }}</th>
+                            <td>{{ car.plate_no }}</td>
+                            <td>{{ car.vin_code }}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    {% else %}
+    <p>{% trans 'There are cars in service.' %}</p>
+    {% endif %}
+{% endblock content %}

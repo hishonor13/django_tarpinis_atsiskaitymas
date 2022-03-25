@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-19 17:20+0200\n"
+"PO-Revision-Date: 2022-03-19 18:36+0200\n"
+"Last-Translator:   <mantas.kelminskas@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < 11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 : n % 1 != 0 ? 2: 3);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: .\autoservice\models.py:25 .\autoservice\models.py:50
+#, fuzzy
+#| msgid "Klientas"
+msgid "Client"
+msgstr "Klientas"
+
+#: .\autoservice\models.py:26
+#| msgid "Klientas"
+msgid "Clients"
+msgstr "Klientai"
+
+#: .\autoservice\models.py:33
+msgid "Brand"
+msgstr "Markė"
+
+#: .\autoservice\models.py:34
+msgid "ex.: Audi, BMW, FIAT..."
+msgstr "pvz.: Audi, BMW, FIAT..."
+
+#: .\autoservice\models.py:35
+msgid "Model"
+msgstr "Modelis"
+
+#: .\autoservice\models.py:39
+msgid "Car Model"
+msgstr "Automobilio modelis"
+
+#: .\autoservice\models.py:40
+msgid "Cars Models"
+msgstr "Automobilio modeliai"
+
+#: .\autoservice\models.py:47
+msgid "Plate no"
+msgstr "Automobilio valstybiniai numeriai"
+
+#: .\autoservice\models.py:48
+msgid "Car model"
+msgstr "Automobilio modelis"
+
+#: .\autoservice\models.py:49
+#, fuzzy
+#| msgid "VIN kodas"
+msgid "VIN code"
+msgstr "VIN kodas"
+
+#: .\autoservice\models.py:54 .\autoservice\models.py:63
+msgid "Car"
+msgstr "Automobilis"
+
+#: .\autoservice\models.py:55
+msgid "Cars"
+msgstr "Automobiliai"
+
+#: .\autoservice\models.py:62
+msgid "Created at"
+msgstr "Sukurta"
+
+#: .\autoservice\models.py:64 .\autoservice\models.py:68
+msgid "Sum"
+msgstr "Suma"
+
+#: .\autoservice\models.py:69
+msgid "Sums"
+msgstr "Sumos"
+
+#: .\autoservice\models.py:76
+msgid "Name"
+msgstr "Vardas"
+
+#: .\autoservice\models.py:77 .\autoservice\models.py:92
+msgid "Price"
+msgstr "Kaina"
+
+#: .\autoservice\models.py:81 .\autoservice\models.py:89
+msgid "Service"
+msgstr "Paslauga"
+
+#: .\autoservice\models.py:82
+#, fuzzy
+#| msgid "Service"
+msgid "Services"
+msgstr "Paslauga"
+
+#: .\autoservice\models.py:90
+msgid "Remont Order"
+msgstr "Remonto užsakymas"
+
+#: .\autoservice\models.py:91
+msgid "Quantity"
+msgstr "Kiekis"
+
+#: .\autoservice\models.py:96
+msgid "Order"
+msgstr "Užsakymas"
+
+#: .\autoservice\models.py:97
+msgid "Orders"
+msgstr "Užsakymai"
+
+#: .\autoservice\models.py:104
+msgid "Unique UUID for the exact car"
+msgstr "Unikalus UUI kiekvienam automobiliui"
+
+#: .\autoservice\models.py:107
+msgid "Date"
+msgstr "Data"
+
+#: .\autoservice\models.py:110
+msgid "New"
+msgstr "Naujas"
+
+#: .\autoservice\models.py:111
+msgid "Accepted"
+msgstr "Priimtas"
+
+#: .\autoservice\models.py:112
+msgid "Under repair"
+msgstr "Remontuojamas"
+
+#: .\autoservice\models.py:113
+msgid "Done"
+msgstr "Atlikta"
+
+#: .\autoservice\models.py:114
+msgid "Returned"
+msgstr "Grąžinta"
+
+#: .\autoservice\models.py:117
+msgid "Status"
+msgstr "Statusas"
+
+#: .\autoservice\models.py:120
+msgid "Car Instance"
+msgstr ""
+
+#: .\autoservice\models.py:121
+msgid "Car Instances"
+msgstr ""
+
+#: .\autoservice\templates\autoservice\base.html:12
+#, fuzzy
+#| msgid "Service"
+msgid "Autoservice"
+msgstr "Paslauga"
+
+#: .\autoservice\templates\autoservice\index.html:7
+#, fuzzy
+#| msgid "Service"
+msgid "Total Services"
+msgstr "Paslauga"
+
+#: .\autoservice\templates\autoservice\index.html:8
+#, fuzzy
+#| msgid "Remont Order"
+msgid "Total Orders"
+msgstr "Remonto užsakymas"
+
+#: .\autoservice\templates\autoservice\index.html:9
+msgid "Total Cars"
+msgstr "Viso automobilių"
+
+#~ msgid "Picture"
+#~ msgstr "Paveikslėlis"
+
+#~ msgid "User Profile"
+#~ msgstr "Vartotojo profilis"
+
+#~ msgid "User Profiles"
+#~ msgstr "Vartotojo profiliai"
+
+#~ msgid "Kaina"
+#~ msgstr "Kaina"

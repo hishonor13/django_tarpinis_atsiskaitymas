@@ -1,0 +1,34 @@
+{% extends 'autoservice/base.html' %}
+{% load i18n static %}
+{% block content %}
+    <h1>{% trans 'Order detail' %}</h1>
+    {% if order.car %}
+
+    <!-- <div class="container">
+        {{ order.car }}
+    </div> -->
+
+
+        <div class="container">
+            <br/><br/>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <th scope="col">{% trans 'Service' %}</th>
+                    <th scope="col">{% trans 'Quantity' %}</th>
+                    <th scope="col">{% trans 'Price' %}</th>
+                </thead>               
+                <tbody>
+                    {% for line in order.order_no.all %}
+                    <tr>
+                        <th scope="row">{{ line.service }}</th>
+                        <td>{{ line.quantity }}</td>
+                        <td>{{ line.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>   
+            </table>
+        </div>
+    {% else %}
+    <p>{% trans 'Car does not have any services.' %}</p>
+    {% endif %}
+{% endblock content %}

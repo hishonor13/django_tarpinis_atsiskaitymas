@@ -1,0 +1,28 @@
+{% extends 'autoservice/base.html' %}
+{% load i18n static %}
+{% block content %}
+    <h1>{% trans 'Cars details' %}</h1>
+    {% if car.car_model %}
+        <div class="container">
+            <br/><br/>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <th scope="col">{% trans 'Client' %}</th>
+                    <th scope="col">{% trans 'Car' %}</th>
+                    <th scope="col">{% trans 'Plate number' %}</th>
+                    <th scope="col">{% trans 'VIN code' %}</th>
+                </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{ car.client }}</th>
+                            <td>{{ car.car_model }}</td>
+                            <td>{{ car.plate_no }}</td>
+                            <td>{{ car.vin_code }}</td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>{% trans 'There are no cars in list right now.' %}</p>
+    {% endif %}
+{% endblock content %}
