@@ -1,7 +1,9 @@
+from datetime import date, timedelta
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from PIL import Image
+from tinymce.models import HTMLField
 # import uuid
 from user_profile.models import UserProfile
 
@@ -25,6 +27,10 @@ class Car(models.Model):
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE, null=True, verbose_name=_('Car model'))
     vin_code = models.CharField(_('VIN code'), max_length=17)
     client = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, verbose_name=_('Client'))
+    # car_description = models.TextField(_('Car description'), blank=True, null=True)
+    car_description = HTMLField(_('Car description'), max_length=10000, 
+        help_text=_('Short car description'), blank=True, default='')
+
     
     picture = models.ImageField(_('Picture'), default='autoservice/img/default.png')
 
@@ -50,6 +56,8 @@ class RepairOrder(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, null=True, verbose_name=_('Car'))
     sum = models.DecimalField(_('Sum'), max_digits=7, decimal_places=2, blank=True, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
+    due_back = models.DateField(_('Due back'), null=True, blank=True, db_index=True, default=date.today() + timedelta(days=7))
+
 
     LOAN_STATUS = (
         (0, _('New')),
@@ -62,9 +70,15 @@ class RepairOrder(models.Model):
     status = models.PositiveIntegerField(_('Status'), default=0, choices=LOAN_STATUS)
 
     class Meta:
-        ordering = ['car']
+        ordering = ['due_back']
         verbose_name = _('Repair order')
         verbose_name_plural = _('Repair orders')
+
+    @property
+    def is_overdue(self):
+        if self.status < 50 and self.due_back and self.due_back < date.today():
+            return True
+        return False        
 
     def __str__(self):
         return f'{self.car}'
@@ -93,6 +107,10 @@ class OrderNo(models.Model):
         ordering = ['remont_order']
         verbose_name = _('Repair job')
         verbose_name_plural = _('Repair jobs') 
+
+    @property
+    def repair_price(self):
+        return self.quantity * self.price
 
     def __str__(self):
         return f'{self.service} {self.price}'

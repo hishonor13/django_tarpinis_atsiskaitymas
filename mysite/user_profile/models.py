@@ -23,7 +23,6 @@ class UserProfile(models.Model):
             img.thumbnail(output_size)
             img.save(self.picture.path)
 
-    
     class Meta:
         verbose_name = _('User Profile')
         verbose_name_plural = _('User Profiles')

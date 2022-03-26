@@ -1,12 +1,10 @@
-from datetime import date
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from django.views.generic.edit import FormMixin
 from django.urls import reverse_lazy
-from .models import Car, RepairOrder, Service, OrderNo
+from .models import Car, RepairOrder, Service
 
 
 class CarListView(generic.ListView):
@@ -40,6 +38,23 @@ class RepairOrderView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({'debug': settings.TIME_ZONE})
+        return context 
+
+
+class ServicesView(generic.ListView):
+    model = Service
+    template_name = 'autoservice/service_list.html'
+    context_object_name = 'services'
+    queryset = Service.objects.all()
+    paginate_by = 5
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({'debug': settings.TIME_ZONE})
         return context
 
 
@@ -47,20 +62,6 @@ class CarDetail(generic.DetailView):
     model = Car
     template_name = 'autoservice/car_detail.html'
     context_object_name = 'car'
-    
-    # def post(self, request, *args, **kwargs):
-    #     self.object = self.get_object()
-    #     form = self.get_form()
-    #     if form.is_valid():
-    #         return self.form_valid(form)
-    #     else:
-    #         return self.form_invalid(form)
-
-    # def form_valid(self, form):
-    #     form.instance.car = self.object
-    #     form.instance.client = self.request.user
-    #     form.save()
-    #     return super(CarDetail, self).form_valid(form)
 
 
 class OrderDetail(generic.DetailView):
@@ -69,17 +70,11 @@ class OrderDetail(generic.DetailView):
     context_object_name = 'order'
    
 
-
-# Naujai kuriama
 class CarRemontOrder(generic.CreateView, LoginRequiredMixin):
     model = RepairOrder
     fields = ['car', 'description']
     success_url = reverse_lazy('autoservice:cars')
     template_name = 'autoservice/create_order.html'
-
-
-
-
 
 
 
@@ -103,8 +98,9 @@ def index(request):
 def search_cars(request):
     query = request.GET.get('query')
     search_results = Car.objects.filter(
-        Q(client__user__first_name__icontains=query) | 
-        Q(client__user__last_name__icontains=query) | 
+        Q(client__user__first_name__icontains=query) |
+        Q(client__user__last_name__icontains=query) |
+        Q(client__user__username__icontains=query) |
         Q(car_model__brand__icontains=query) | 
         Q(car_model__model__icontains=query) | 
         Q(plate_no__icontains=query) |

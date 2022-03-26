@@ -1,8 +1,8 @@
 {% extends 'autoservice/base.html' %}
 {% load i18n static %}
 {% block content %}
-    <h1>{% trans 'Orders list' %}</h1>
-    {% if orders %}
+    <h1>{% trans 'Services list' %}</h1>
+    {% if services %}
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
@@ -20,27 +20,21 @@
             <br/><br/>
             <table class="table table-hover">
                 <thead class="thead-dark">
-                    <th scope="col">{% trans 'Date' %}</th>
-                    <th scope="col">{% trans 'Car' %}</th>
-                    <th scope="col">{% trans 'Desciption' %}</th>
-                    <th scope="col">{% trans 'Repair status' %}</th>
-                    <th scope="col">{% trans 'Due back' %}</th>
+                    <th scope="col">{% trans 'Name' %}</th>
+                    <th scope="col">{% trans 'Price' %}</th>
                 </thead>
-                {% for order in orders %}
+                {% for service in services %}
                     <tbody>
-                        <tr onclick=window.location.href="{% url 'autoservice:order-detail' order.id %}" class="{% if order.is_overdue %}table-danger{% endif %}">
-                            <th scope="row">{{ order.created_at }}</th>
-                            <td>{{ order.car }}</td>
-                            <td>{{ order.description }}</td>
-                            <td>{{ order.get_status_display }}</td>
-                            <td>{{ order.due_back }}</td>
+                        <tr>
+                            <th scope="row">{{ service.name }}</th>
+                            <th scope="row">{{ service.price }}</th>
                         </tr>
                     </tbody>
                 {% endfor %}
             </table>
         </div>
     {% else %}
-    <p>{% trans 'There are no cars in service.' %}</p>
+    <p>{% trans 'There are no service yet.' %}</p>
     {% endif %}
 {% endblock content %}
 

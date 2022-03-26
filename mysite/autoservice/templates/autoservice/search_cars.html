@@ -7,11 +7,11 @@
         <ul class="list-group">
             {% for car in cars %}
             <li class="list-group-item">
-                <a href="{% url 'autoservice:car-detail' car.id %}">{{ car.car_model.brand }} - {{ car.car_model.model }} @ {{ car.client.user }}</a>
+                <a href="{% url 'autoservice:car-detail' car.id %}">{{ car.car_model.brand }} - {{ car.car_model.model }}</a>
             </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p class="text-danger">{% trans 'No cars found.' %}</p>
+        <p class="text-danger">{% trans 'No search results.' %}</p>
     {% endif %}
 {% endblock content %}

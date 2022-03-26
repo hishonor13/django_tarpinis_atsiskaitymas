@@ -1,8 +1,11 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 from .models import Car, CarModel, RepairOrder, Service, OrderNo
 
 
-admin.site.site_header = "Autoserviso administravimas"
+
+admin.site.site_header = _('Autoservice admin')
+admin.site.site_title = _('Autoservice Admin')
 
 class CarAdmin(admin.ModelAdmin):
     list_display = ('plate_no', 'car_model', 'vin_code', 'client')
@@ -16,7 +19,7 @@ class OrderNoAdmin(admin.ModelAdmin):
 
 
 class RepairOrderAdmin(admin.ModelAdmin):
-        list_display =  ('car', 'description')
+        list_display =  ('car', 'description', 'due_back', 'is_overdue')
 
 
 class ServiceAdmin(admin.ModelAdmin):

@@ -11,6 +11,7 @@
                     <th scope="col">{% trans 'Car' %}</th>
                     <th scope="col">{% trans 'Plate number' %}</th>
                     <th scope="col">{% trans 'VIN code' %}</th>
+                    <th scope="col">{% trans 'Car description' %}</th>
                 </thead>
                     <tbody>
                         <tr>
@@ -18,6 +19,7 @@
                             <td>{{ car.car_model }}</td>
                             <td>{{ car.plate_no }}</td>
                             <td>{{ car.vin_code }}</td>
+                            <td>{{ car.car_description|safe }}</td>
                         </tr>
                     </tbody>
             </table>
@@ -25,4 +27,5 @@
     {% else %}
         <p>{% trans 'There are no cars in list right now.' %}</p>
     {% endif %}
+        
 {% endblock content %}
