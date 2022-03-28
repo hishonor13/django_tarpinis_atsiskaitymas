@@ -69,8 +69,6 @@ class OrderDetail(generic.DetailView):
     model = RepairOrder
     template_name = 'autoservice/order_detail.html'
     context_object_name = 'order'
-    # OrderNo.objects.all().aggregate(Sum('repair_price'))
-    # total_repair_price = float(Sum(RepairOrder.order_no.repair_price))
    
 
 class CarRemontOrder(generic.CreateView, LoginRequiredMixin):
@@ -82,17 +80,9 @@ class CarRemontOrder(generic.CreateView, LoginRequiredMixin):
 
 class AddCommetView(generic.CreateView):
     model = Comment
-    # fields = '__all__'
     form_class = CommentForm
     success_url = reverse_lazy('autoservice:order-list')
     template_name = 'autoservice/add_comment.html'
-
-    # def form_valid(self, form):
-    #     form.instance.orderno_id = self.kwargs['pk']
-    #     return super().form_valid(form)
-
-    # def get_success_url(self):
-    #     return reverse_lazy('order-detail', kwargs={'pk': self.kwargs['pk']})
 
 
 def index(request):

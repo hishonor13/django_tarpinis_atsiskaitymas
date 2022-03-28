@@ -5,6 +5,7 @@
     {% if order.car %}
     <br>
     <h4>{% trans 'Car under repair' %}: <strong>{{ order.car }} @ {{ order.car.plate_no }}</strong></h4>
+    <h5>{% trans 'Car owner' %}: <strong>{{ order.car.client.user.username }}</strong></h5>
     <br/>
     <h4>{% trans 'Car repair services' %}</h4>
         <div class="container">  
@@ -24,7 +25,7 @@
                     {% endfor %}
                 </tbody>   
             </table>
-            <h4>{% trans 'Repair total price' %}: {{ order.order_no.total_repair_price }}</h4>
+            <h4 align="right">{% trans 'Repair total price' %}: <strong>{{ order.sum }}</strong></h4>
         </div>
     {% else %}
     <p>{% trans 'Car does not have any services.' %}</p>

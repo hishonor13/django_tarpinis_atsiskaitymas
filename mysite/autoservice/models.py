@@ -97,7 +97,7 @@ class Service(models.Model):
 
 class OrderNo(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name=_('Service'))
-    remont_order = models.ForeignKey(RepairOrder, on_delete=models.CASCADE, null=True, verbose_name=_('Remont Order'), related_name='order_no') # reikia realaitedname prisikirti
+    remont_order = models.ForeignKey(RepairOrder, on_delete=models.CASCADE, null=True, verbose_name=_('Remont Order'), related_name='order_no')
     quantity = models.IntegerField(_('Quantity'))
     price = models.DecimalField(_('Price'), max_digits=5, decimal_places=2, blank=True, null=True)
 
@@ -109,6 +109,13 @@ class OrderNo(models.Model):
     @property
     def repair_price(self):
         return self.quantity * self.price    
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.remont_order.sum = 0
+        for line in self.remont_order.order_no.all():
+            self.remont_order.sum += line.repair_price
+        self.remont_order.save()
 
     def __str__(self):
         return f'{self.service} {self.price}'
