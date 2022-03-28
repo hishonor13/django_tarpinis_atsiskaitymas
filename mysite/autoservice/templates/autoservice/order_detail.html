@@ -24,9 +24,24 @@
                     {% endfor %}
                 </tbody>   
             </table>
-            <h4>{% trans 'Repair total price' %}: {{ total_repair_price }}</h4>
+            <h4>{% trans 'Repair total price' %}: {{ order.order_no.total_repair_price }}</h4>
         </div>
     {% else %}
     <p>{% trans 'Car does not have any services.' %}</p>
     {% endif %}
+    <br>
+    <hr>
+    <h3>{% trans 'Comments...' %}</h3>
+        {% if not order.comments.all %}
+            <p>{% trans 'No comments yet...' %} <a href="{% url 'autoservice:add-comment' order.id %}">{% trans 'Add One' %}</a></p>
+        {% else %}
+            <a href="{% url 'autoservice:add-comment' order.id %}">{% trans 'Add Comment' %}</a>
+            <br><br>
+            {% for comment in order.comments.all %}
+                <p><strong>{{ comment.name.user }} - {{ comment.created_at }}</strong></p> 
+                <p>{{ comment.text|safe }}</p>
+
+            {% endfor %}     
+        {% endif %}
+
 {% endblock content %}

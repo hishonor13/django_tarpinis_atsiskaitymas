@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import Car, CarModel, RepairOrder, Service, OrderNo
+from .models import Car, CarModel, RepairOrder, Service, OrderNo, Comment
 
 
 
@@ -29,9 +29,13 @@ class ServiceAdmin(admin.ModelAdmin):
 class CarModelAdmin(admin.ModelAdmin):
     list_display =  ('brand', 'model')
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display =  ('created_at', 'text')
+
 
 admin.site.register(Car, CarAdmin)
 admin.site.register(CarModel, CarModelAdmin)
 admin.site.register(RepairOrder, RepairOrderAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(OrderNo, OrderNoAdmin)
+admin.site.register(Comment, CommentAdmin)

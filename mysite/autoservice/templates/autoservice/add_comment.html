@@ -1,0 +1,17 @@
+{% extends 'autoservice/base.html' %}
+{% load i18n crispy_forms_tags %}
+{% block content %}
+<h1>{% trans 'Add comment' %}</h1>
+<br>
+<div class="content-section">
+    <form method="post" action="">
+        <fieldset class="form-group">
+            {% csrf_token %}
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-secondary">{% trans 'Add Comment' %}</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

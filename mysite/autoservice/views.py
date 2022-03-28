@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.urls import reverse_lazy
-from .models import Car, RepairOrder, Service
+from .models import Car, RepairOrder, Service, Comment
+from .forms import CommentForm
 
 
 class CarListView(generic.ListView):
@@ -68,6 +69,8 @@ class OrderDetail(generic.DetailView):
     model = RepairOrder
     template_name = 'autoservice/order_detail.html'
     context_object_name = 'order'
+    # OrderNo.objects.all().aggregate(Sum('repair_price'))
+    # total_repair_price = float(Sum(RepairOrder.order_no.repair_price))
    
 
 class CarRemontOrder(generic.CreateView, LoginRequiredMixin):
@@ -76,6 +79,20 @@ class CarRemontOrder(generic.CreateView, LoginRequiredMixin):
     success_url = reverse_lazy('autoservice:cars')
     template_name = 'autoservice/create_order.html'
 
+
+class AddCommetView(generic.CreateView):
+    model = Comment
+    # fields = '__all__'
+    form_class = CommentForm
+    success_url = reverse_lazy('autoservice:order-list')
+    template_name = 'autoservice/add_comment.html'
+
+    # def form_valid(self, form):
+    #     form.instance.orderno_id = self.kwargs['pk']
+    #     return super().form_valid(form)
+
+    # def get_success_url(self):
+    #     return reverse_lazy('order-detail', kwargs={'pk': self.kwargs['pk']})
 
 
 def index(request):

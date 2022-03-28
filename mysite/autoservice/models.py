@@ -27,7 +27,6 @@ class Car(models.Model):
     car_model = models.ForeignKey(CarModel, on_delete=models.CASCADE, null=True, verbose_name=_('Car model'))
     vin_code = models.CharField(_('VIN code'), max_length=17)
     client = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, verbose_name=_('Client'))
-    # car_description = models.TextField(_('Car description'), blank=True, null=True)
     car_description = HTMLField(_('Car description'), max_length=10000, 
         help_text=_('Short car description'), blank=True, default='')
 
@@ -57,7 +56,6 @@ class RepairOrder(models.Model):
     sum = models.DecimalField(_('Sum'), max_digits=7, decimal_places=2, blank=True, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
     due_back = models.DateField(_('Due back'), null=True, blank=True, db_index=True, default=date.today() + timedelta(days=7))
-
 
     LOAN_STATUS = (
         (0, _('New')),
@@ -115,3 +113,12 @@ class OrderNo(models.Model):
     def __str__(self):
         return f'{self.service} {self.price}'
 
+
+class Comment(models.Model):
+    name = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, verbose_name=_('Client'))
+    created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
+    for_order = models.ForeignKey(RepairOrder, null=True, blank=True, on_delete=models.CASCADE, related_name='comments', verbose_name=_('For order'))
+    text = HTMLField(_('Comment'), max_length=10000, blank=True, default='')
+
+    def __str__(self):
+        return f'{self.created_at} - {self.text}'
