@@ -108,7 +108,7 @@ class OrderNo(models.Model):
 
     @property
     def repair_price(self):
-        return self.quantity * self.price
+        return self.quantity * self.price    
 
     def __str__(self):
         return f'{self.service} {self.price}'
